@@ -10,7 +10,7 @@
     "test": "npx tsc && jasmine",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write 'src/**/*.ts'",
+    "format": "prettier --write \"image_processing_back-end/src/**/*.ts\"",
     "jasmine": "jasmine"
   },
   "keywords": [],
