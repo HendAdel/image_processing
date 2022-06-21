@@ -10,7 +10,10 @@ const port = 3000;
 
 //Use routes
 app.use('/api', routes);
-
+app.get('/',  (req, res) => {    
+   res.send(`Image processing project main end point!`);
+}
+    )
 // resize image endpoint function
 
 

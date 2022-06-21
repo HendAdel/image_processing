@@ -11,3 +11,20 @@
 * The server that have the endpoint function.
 * Using Jasmine for test unit.
 * Use sharp to resize the image.
+
+## To run the project
+1- cd to folder (image_processing_back-end)
+2- Install dependencies (node.js - typescript - express - jasmine - supertest)
+    a. npm init -y
+    b. npm install typescript & npm install typescript --save-dev
+    c.tsc --init
+    d. npm install express morgan dotenv
+    e. npm install --save-dev @types/express @types/morgan @types/node nodemon ts-node nodemon
+    f. npm i supertest jasmine-spec-reporter jasmine
+OR make one step by:
+    A. npm i -g m-zanaty-web-utils
+3- start the server by (npm run start)
+4- use the endpoint (http://localhost:3000/api/resize)
+5- add the image name, width, and hight as query string parameters like this(http://localhost:3000/api/resize?image_name=[image name].jpg&width=[image width]&hight=[image hight])
+6- if the image exist with the same width and hight in the folder(image_processing\image_processing_back-end\images\thumbnail) it will back in the response.
+7- if the Image with new width or hight. The resize_image function will resize it and save it to the (thumbnail) folder and send it with response

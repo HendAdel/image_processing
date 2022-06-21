@@ -10,6 +10,10 @@ var app = express();
 var port = 3000;
 //Use routes
 app.use('/api', img_rout_1.default);
+app.get('/', function (req, res) {
+    console.log("test endpoint!");
+    res.send("Image processing project main end point!");
+});
 // resize image endpoint function
 // start server function
 app.listen(port, function () {
