@@ -32,6 +32,7 @@ resize.get('/', async (req: Request, res: Response): Promise<void> => {
   image_name = req.query.image_name as unknown as string;
   if (!image_name) {
     res.status(400).send('Bad request The Image name is required!');
+    return;
   }
   image_ext = path.extname(image_name);
   name_w_ext = path.parse(image_name).name;
@@ -39,12 +40,14 @@ resize.get('/', async (req: Request, res: Response): Promise<void> => {
   n_img_w = parseInt(req.query.width as unknown as string);
   if (!n_img_w) {
     res.status(400).send('Bad request The Image new width is required!');
+    return;
   }
   n_img_h = parseInt(req.query.hight as unknown as string);
   if (!n_img_h) {
     res.status(400).send('Bad request The Image new hight is required!');
+    return;
   }
-  let o_fullname = o_img_path + '/' + image_name;
+  const o_fullname = o_img_path + '/' + image_name;
   let n_fullname = '';
   assist.file_exist(o_fullname);
 
@@ -63,11 +66,13 @@ resize.get('/', async (req: Request, res: Response): Promise<void> => {
 
       if (assist.file_exist(n_fullname) === true) {
         res.sendFile(n_fullname);
+        return;
       } else {
         // Resize the image with new dimensions, and send it.
         try {
           await assist.resize_image(o_fullname, n_img_w, n_img_h, n_fullname);
           res.sendFile(n_fullname);
+          return;
         } catch (error) {
           throw new Error(
             `Cannot get the new image, Please try again later! ${error}`
@@ -76,9 +81,11 @@ resize.get('/', async (req: Request, res: Response): Promise<void> => {
       }
     } else {
       res.send('Please enter a valid dimensions!');
+      return;
     }
   } else {
     res.send('Please choose a valid Image!');
+    return;
   }
 });
 

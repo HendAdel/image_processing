@@ -24,7 +24,7 @@ async function resize_image(
   file_wdith: number,
   file_height: number,
   n_file_path: string
-) {
+): Promise<void> {
   try {
     await sharp(file_name)
       .resize({ file_wdith, file_height })

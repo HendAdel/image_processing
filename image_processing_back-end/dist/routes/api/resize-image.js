@@ -43,81 +43,72 @@ var express_1 = __importDefault(require("express"));
 var assist_1 = __importDefault(require("../controllers/assist"));
 var node_path_1 = __importDefault(require("node:path"));
 var resize = express_1.default.Router();
-var image_name = "";
-var image_ext = "";
-var name_w_ext = "";
+var image_name = '';
+var image_ext = '';
+var name_w_ext = '';
 var n_img_w = 0;
 var n_img_h = 0;
-//TODO: fix images pathes with path packge
-var o_img_path = node_path_1.default.resolve(__dirname, '..', '..', '..', 'images', 'original-images'); //o_img_path = "../../image_processing/image_processing_back-end/images/original-images";
-var t_img_path = node_path_1.default.resolve(__dirname, '..', '..', '..', 'images', 'thumbnail'); //"/images/thumbnail";
+// Set images pathes with path packge
+var o_img_path = node_path_1.default.resolve(__dirname, '..', '..', '..', 'images', 'original-images');
+var t_img_path = node_path_1.default.resolve(__dirname, '..', '..', '..', 'images', 'thumbnail');
 resize.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var o_fullname, n_fullname, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 res.status(200);
-                // console.log(path.parse("D:/Udacity/WD_Fullstack/Tries/image_processing/image_processing_back-end/images/original-images/fjord.jpg"));
                 image_name = req.query.image_name;
                 if (!image_name) {
                     res.status(400).send('Bad request The Image name is required!');
+                    return [2 /*return*/];
                 }
                 image_ext = node_path_1.default.extname(image_name);
                 name_w_ext = node_path_1.default.parse(image_name).name;
-                console.log(image_name);
-                console.log(o_img_path);
                 n_img_w = parseInt(req.query.width);
                 if (!n_img_w) {
                     res.status(400).send('Bad request The Image new width is required!');
+                    return [2 /*return*/];
                 }
                 n_img_h = parseInt(req.query.hight);
                 if (!n_img_h) {
                     res.status(400).send('Bad request The Image new hight is required!');
+                    return [2 /*return*/];
                 }
                 o_fullname = o_img_path + '/' + image_name;
-                console.log(o_fullname);
                 n_fullname = '';
                 assist_1.default.file_exist(o_fullname);
-                if (!(assist_1.default.file_exist(o_fullname) === true)) return [3 /*break*/, 8];
-                if (!(assist_1.default.valid_width(n_img_w, n_img_h) === true)) return [3 /*break*/, 6];
-                n_fullname = node_path_1.default.resolve(t_img_path + '/' + name_w_ext + '_' + n_img_w + '_' + n_img_h + image_ext);
-                console.log("new image path & name: ".concat(n_fullname));
+                if (!(assist_1.default.file_exist(o_fullname) === true)) return [3 /*break*/, 7];
+                if (!(assist_1.default.valid_width(n_img_w, n_img_h) === true)) return [3 /*break*/, 5];
+                n_fullname = node_path_1.default.resolve(t_img_path +
+                    '/' +
+                    name_w_ext +
+                    '_' +
+                    n_img_w +
+                    '_' +
+                    n_img_h +
+                    image_ext);
                 if (!(assist_1.default.file_exist(n_fullname) === true)) return [3 /*break*/, 1];
-                console.log("image exist with same dimensions!");
-                // send the exist image
-                // res.sendFile(__dirname + n_fullname); 
                 res.sendFile(n_fullname);
-                return [3 /*break*/, 5];
+                return [2 /*return*/];
             case 1:
-                //TODO: resize the image with new dimensions, and send it.
-                console.log("file name: ".concat(o_fullname));
-                console.log("file width: ".concat(n_img_w));
-                console.log("file hight: ".concat(n_img_h));
-                console.log("new file path : ".concat(n_fullname));
-                _a.label = 2;
-            case 2:
-                _a.trys.push([2, 4, , 5]);
+                _a.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, assist_1.default.resize_image(o_fullname, n_img_w, n_img_h, n_fullname)];
-            case 3:
+            case 2:
                 _a.sent();
-                console.log(n_fullname);
-                // res.sendFile(n_fullname, { root: __dirname });
                 res.sendFile(n_fullname);
-                return [3 /*break*/, 5];
-            case 4:
+                return [2 /*return*/];
+            case 3:
                 error_1 = _a.sent();
                 throw new Error("Cannot get the new image, Please try again later! ".concat(error_1));
-            case 5: return [3 /*break*/, 7];
-            case 6:
-                console.log("invalid dimensions!");
-                res.send("Please enter a valid dimensions!");
-                _a.label = 7;
-            case 7: return [3 /*break*/, 9];
-            case 8:
-                console.log("invalid Image!");
-                res.send("Please choose a valid Image!");
-                _a.label = 9;
-            case 9: return [2 /*return*/];
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                res.send('Please enter a valid dimensions!');
+                return [2 /*return*/];
+            case 6: return [3 /*break*/, 8];
+            case 7:
+                res.send('Please choose a valid Image!');
+                return [2 /*return*/];
+            case 8: return [2 /*return*/];
         }
     });
 }); });

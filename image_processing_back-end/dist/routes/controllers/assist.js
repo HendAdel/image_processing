@@ -42,25 +42,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 //call sharp tool to resize image
 var sharp = require('sharp');
-// Check if the image exist. the file_name argument is the path + the image name ex"./images/thumbnail/fjord_200_200.jpg"
-// async function file_exist(file_name: string): Promise<boolean>{
-//     try {
-//         const files = await readdir( "../../image_processing/image_processing_back-end/images/original-images");
-//         for (const file of files)
-//           console.log(file);
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     console.log('assist: ' + file_name);
-//     if(fs.existsSync(file_name)){
-//         return true;
-//     }
-//     return false;
-// }
 function file_exist(file_name) {
-    console.log('assist: ' + file_name);
     if (fs_1.default.existsSync(file_name)) {
-        console.log('assist: file exist ');
         return true;
     }
     return false;
@@ -75,30 +58,20 @@ function valid_width(width, hight) {
 // Resize the image using sharp
 function resize_image(file_name, file_wdith, file_height, n_file_path) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
-                    _b.trys.push([0, 2, , 3]);
-                    console.log("first line");
+                    _a.trys.push([0, 2, , 3]);
                     return [4 /*yield*/, sharp(file_name)
-                            .resize({ file_wdith: file_wdith, file_height: file_height
-                            // kernel: sharp.kernel.nearest,
-                            // fit: 'contain',
-                            // position: 'right top',
-                            // background: { r: 255, g: 255, b: 255, alpha: 0.5 }
-                        })
-                            // .toFile(`${n_file_path}.jpg`)
+                            .resize({ file_wdith: file_wdith, file_height: file_height })
                             .toFile(n_file_path)];
                 case 1:
-                    _b.sent();
-                    // .then(() => {
-                    console.log("last line");
+                    _a.sent();
                     return [3 /*break*/, 3];
                 case 2:
-                    _a = _b.sent();
-                    console.log("can not process the image!");
-                    return [3 /*break*/, 3];
+                    error_1 = _a.sent();
+                    throw new Error("Cannot get the new image, Please try again later! ".concat(error_1));
                 case 3: return [2 /*return*/];
             }
         });

@@ -13,12 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jasmine": "^4.2.1",
-    "jasmine-spec-reporter": "^7.0.0",
-    "m-zanaty-web-utils": "^0.0.19",
-    "supertest": "^6.2.3"
+    "m-zanaty-web-utils": "^0.0.19"
   },
   "devDependencies": {
-    "@types/supertest": "^2.0.12"
+    "@types/supertest": "^2.0.12",
+    "jasmine": "^4.2.1",
+    "jasmine-spec-reporter": "^7.0.0"
   }
 }

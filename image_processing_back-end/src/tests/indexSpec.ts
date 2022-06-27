@@ -1,5 +1,8 @@
 import app from '../index';
 import supertest from 'supertest';
+import resize from '../routes/api/resize-image';
+import assist from '../routes/controllers/assist';
+import path from 'node:path';
 
 const req = supertest(app);
 
@@ -11,10 +14,30 @@ describe('Test Endpoint', () => {
 });
 
 describe('Resizing image endpint test', () => {
+ 
   it('Should resize the image', async () => {
-    const result = await req.get(
-      `/api/resize?image_name=santamonica.jpg&width=300&hight=250`
+    const image_name = 'santamonica.jpg';
+    const o_img_path = path.resolve(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'images',
+      'original-images'
     );
-    expect(result.status).toBe(200);
-  });
+    const t_img_path = path.resolve(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'images',
+      'thumbnail'
+    );
+    const n_img_h = 250;
+    const n_img_w = 250;
+    expect(async () => {
+      await assist.resize_image(o_img_path, n_img_w, n_img_h, t_img_path);
+    }).not.toThrow();
+});
+
 });

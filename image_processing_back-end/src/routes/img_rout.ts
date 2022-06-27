@@ -1,9 +1,9 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import resize from './api/resize-image';
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
+routes.get('/', async (_req: Request, res: Response): Promise<void> => {
   res.send('Image rout!');
 });
 

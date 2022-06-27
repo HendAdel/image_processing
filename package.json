@@ -4,14 +4,14 @@
   "description": "",
   "main": "image_processing_back-end/src/index.js",
   "scripts": {
-    "start": "nodemon image_processing_back-end/src/intex.ts",
+    "start": "nodemon image_processing_back-end/src/index.ts",
     "build": "npx tsc",
     "start:prod": "nmp run build && node dist/index.js",
-    "test": "npx tsc && jasmine",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write \"image_processing_back-end/src/**/*.ts\"",
-    "jasmine": "jasmine"
+    "jasmine": "jasmine",
+    "test": "npm run build && npm run jasmine"
   },
   "keywords": [],
   "author": "",
@@ -26,18 +26,16 @@
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jasmine-spec-reporter": "^7.0.0",
     "nodemon": "^2.0.16",
     "prettier": "2.6.0",
+    "supertest": "^6.2.3",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.2"
   },
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.18.1",
-    "jasmine": "^4.0.2",
-    "jasmine-spec-reporter": "^7.0.0",
-    "morgan": "^1.10.0",
-    "sharp": "^0.30.3",
-    "supertest": "^6.2.2"
+    "sharp": "^0.30.3"
   }
 }

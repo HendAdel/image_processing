@@ -41,6 +41,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var index_1 = __importDefault(require("../index"));
 var supertest_1 = __importDefault(require("supertest"));
+var assist_1 = __importDefault(require("../routes/controllers/assist"));
+var node_path_1 = __importDefault(require("node:path"));
 var req = (0, supertest_1.default)(index_1.default);
 describe('Test Endpoint', function () {
     it('Response status should be 200', function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -56,18 +58,26 @@ describe('Test Endpoint', function () {
         });
     }); });
 });
-describe("Resizing image endpint test", function () {
+describe('Resizing image endpint test', function () {
     it('Should resize the image', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
+        var image_name, o_img_path, t_img_path, n_img_h, n_img_w;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, req
-                        .get("/api/resize?image_name=santamonica.jpg&width=300&hight=250")];
-                case 1:
-                    result = _a.sent();
-                    expect(result.status).toBe(200);
-                    return [2 /*return*/];
-            }
+            image_name = 'santamonica.jpg';
+            o_img_path = node_path_1.default.resolve(__dirname, '..', '..', '..', 'images', 'original-images');
+            t_img_path = node_path_1.default.resolve(__dirname, '..', '..', '..', 'images', 'thumbnail');
+            n_img_h = 250;
+            n_img_w = 250;
+            expect(function () { return __awaiter(void 0, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, assist_1.default.resize_image(o_img_path, n_img_w, n_img_h, t_img_path)];
+                        case 1:
+                            _a.sent();
+                            return [2 /*return*/];
+                    }
+                });
+            }); }).not.toThrow();
+            return [2 /*return*/];
         });
     }); });
 });
